@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/pdfs/*.pdf
+data/index/*.json
+data/index/*.npy
+results/*.csv
+results/*.json
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Jupyter and model caches
+.ipynb_checkpoints/
+.cache/
+
+# Large AI model weights
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.onnx

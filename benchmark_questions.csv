@@ -1,0 +1,13 @@
+id,question,expected_document,notes
+1,What is static runout and how is it measured?,FIST_2-1_Alignment_Rotating_Machinery.pdf,Alignment manual topic
+2,What is meant by shaft concentricity?,FIST_2-1_Alignment_Rotating_Machinery.pdf,Alignment manual topic
+3,What is the reverse indicator method of shaft alignment?,FIST_2-1_Alignment_Rotating_Machinery.pdf,Alignment manual topic
+4,What is the purpose of plumb wire measurements?,FIST_2-1_Alignment_Rotating_Machinery.pdf,Alignment manual topic
+5,What is the face and rim alignment method?,FIST_2-1_Alignment_Rotating_Machinery.pdf,Alignment manual topic
+6,What kinds of alignment equipment are used for rotating machinery?,FIST_2-1_Alignment_Rotating_Machinery.pdf,Alignment manual topic
+7,How is lubricant contamination addressed in maintenance?,FIST_2-4_Lubrication_Equipment.pdf,Lubrication manual topic - validate passage
+8,What are the purposes of an equipment lubrication program?,FIST_2-4_Lubrication_Equipment.pdf,Lubrication manual topic - validate passage
+9,What considerations affect selection of industrial lubricants?,FIST_2-4_Lubrication_Equipment.pdf,Lubrication manual topic - validate passage
+10,What mechanical maintenance activities apply to large pump units?,FIST_2-12_Mechanical_Maintenance.pdf,Mechanical maintenance manual topic
+11,What maintenance concerns are described for hydroelectric generating units?,FIST_2-12_Mechanical_Maintenance.pdf,Mechanical maintenance manual topic
+12,What inspections are associated with large hydroelectric mechanical equipment?,FIST_2-12_Mechanical_Maintenance.pdf,Mechanical maintenance manual topic
