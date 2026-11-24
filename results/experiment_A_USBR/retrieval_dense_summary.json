@@ -1,0 +1,9 @@
+{
+  "evaluation_level": "DOCUMENT (not passage/page relevance)",
+  "mode": "Dense",
+  "k": 5,
+  "n_questions": 12,
+  "document_hit_at_k": 1.0,
+  "document_mrr_at_k": 0.875,
+  "mean_retrieval_ms": 1280.6266666666668
+}

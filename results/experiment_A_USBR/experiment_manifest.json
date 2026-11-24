@@ -1,0 +1,97 @@
+{
+  "experiment": "A_USBR_Public_Manuals",
+  "dataset_source": "U.S. Bureau of Reclamation",
+  "tnb_data_used": false,
+  "documents": [
+    {
+      "filename": "FIST_2-1_Alignment_Rotating_Machinery.pdf",
+      "pages": 109,
+      "chunks": 251,
+      "low_text_pages": [
+        1,
+        10,
+        14,
+        19,
+        23,
+        91,
+        92,
+        94,
+        100,
+        109
+      ]
+    },
+    {
+      "filename": "FIST_2-4_Lubrication_Equipment.pdf",
+      "pages": 48,
+      "chunks": 115,
+      "low_text_pages": [
+        1,
+        2,
+        10
+      ]
+    },
+    {
+      "filename": "FIST_2-12_Mechanical_Maintenance.pdf",
+      "pages": 62,
+      "chunks": 145,
+      "low_text_pages": [
+        1,
+        10
+      ]
+    }
+  ],
+  "total_chunks": 511,
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "generation_model": "qwen3:4b-instruct-2507-q4_K_M",
+  "retrieval_methods": [
+    "BM25",
+    "Dense",
+    "Hybrid RRF"
+  ],
+  "evaluation_level": "Document-level proxy",
+  "evaluation_k": 5,
+  "evaluation_results": {
+    "bm25": {
+      "evaluation_level": "DOCUMENT (not passage/page relevance)",
+      "mode": "BM25",
+      "k": 5,
+      "n_questions": 12,
+      "document_hit_at_k": 1.0,
+      "document_mrr_at_k": 0.9583333333333334,
+      "mean_retrieval_ms": 0.21166666666666667
+    },
+    "dense": {
+      "evaluation_level": "DOCUMENT (not passage/page relevance)",
+      "mode": "Dense",
+      "k": 5,
+      "n_questions": 12,
+      "document_hit_at_k": 1.0,
+      "document_mrr_at_k": 0.875,
+      "mean_retrieval_ms": 1280.6266666666668
+    },
+    "hybrid": {
+      "evaluation_level": "DOCUMENT (not passage/page relevance)",
+      "mode": "Hybrid",
+      "k": 5,
+      "n_questions": 12,
+      "document_hit_at_k": 1.0,
+      "document_mrr_at_k": 1.0,
+      "mean_retrieval_ms": 453.1141666666667
+    }
+  },
+  "python_version": "3.11.15",
+  "file_sha256": {
+    "data/index/chunks.json": "78e734b957eea84227b100856fe4ffe9e2f26bbe7d2384e397149664f4f279ce",
+    "data/index/embeddings.npy": "51f6dbd912fd3b61a46dde02c66d84aee4cf555b46702f8884114bf8705c17ef",
+    "benchmark_questions.csv": "f5b1fd37fa7cd003f49a8675112cbdffda9d9de73e65109a18a49f3992f414c2",
+    "rag_core.py": "e812ce200cb7966ab456733f4b5f6c60187d00897cb907db899929905dc7ea68",
+    "evaluate.py": "ed67be7b3f18637e44da10718615c7c13dfc95db10e9febd987f3e1507613ac4",
+    "app.py": "d2126a29489f1298c3f6982d2392a46a122a342ba9b5078a3599a9f9086ef3e3"
+  },
+  "limitations": [
+    "Only 12 benchmark questions",
+    "Document-level relevance, not passage-level relevance",
+    "Latency includes possible model loading",
+    "Generated answer accuracy not formally evaluated"
+  ]
+}

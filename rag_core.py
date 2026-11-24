@@ -172,7 +172,7 @@ def make_prompt(question: str, hits: list[dict]) -> list[dict]:
             {"role":"user","content":f"Source excerpts:\n{evidence}\n\nQuestion: {question}"}]
 
 
-def generate_ollama(question: str, hits: list[dict], model: str = "qwen3:4b",
+def generate_ollama(question: str, hits: list[dict], model: str = "qwen3:4b-instruct-2507-q4_K_M",
                     endpoint: str = "http://127.0.0.1:11434") -> tuple[str, float]:
     if re.search(r"\b(?:TNB|REMACO)\b", question, flags=re.IGNORECASE):
         return ("The current knowledge base contains only published U.S. Bureau of "

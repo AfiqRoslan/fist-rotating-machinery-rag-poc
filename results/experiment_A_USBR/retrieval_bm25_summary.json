@@ -1,0 +1,9 @@
+{
+  "evaluation_level": "DOCUMENT (not passage/page relevance)",
+  "mode": "BM25",
+  "k": 5,
+  "n_questions": 12,
+  "document_hit_at_k": 1.0,
+  "document_mrr_at_k": 0.9583333333333334,
+  "mean_retrieval_ms": 0.21166666666666667
+}
