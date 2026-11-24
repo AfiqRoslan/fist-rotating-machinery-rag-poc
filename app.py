@@ -1,6 +1,8 @@
 
 """Streamlit demo: evidence-first engineering-document RAG research system."""
 
+from pathlib import Path
+
 import streamlit as st
 from rag_core import Engine, generate_ollama
 
@@ -179,15 +181,24 @@ if ask:
             f"score {hit['score']:.3f}",
             expanded=n == 1
         ):
+            # Local PDF citation (works offline)
+            local_pdf = Path("static") / Path(hit["source"]).name
+
+            if local_pdf.is_file():
+                local_url = f"/app/static/{local_pdf.name}#page={hit['page']}"
+                st.markdown(
+                    f"[📄 Open local PDF at page {hit['page']}]({local_url})"
+                )
+
+            # Original PDF citation (requires internet)
             st.markdown(
-                f"[Open original PDF at page {hit['page']}]"
+                f"[🌐 Open official PDF at page {hit['page']}]"
                 f"({hit['url']}#page={hit['page']})"
             )
 
             st.write(hit["text"])
 
             st.caption(f"Retrieval record: {hit['id']}")
-
 
 st.divider()
 
