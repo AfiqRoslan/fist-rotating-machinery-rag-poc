@@ -8,7 +8,27 @@ The project focuses specifically on **shaft alignment, equipment lubrication, an
 
 The research compares **BM25, transformer-based dense retrieval, and hybrid retrieval** to evaluate how effectively relevant maintenance information can be retrieved and used to generate evidence-grounded answers.
 
-> **Project Status — 13 November 2026:** Document preprocessing, BM25 baseline evaluation, and dense embedding generation have been completed. Phase 6 Step 2 (embedding verification) has not started. Hybrid retrieval evaluation and end-to-end RAG testing remain pending.
+## Current PoC status — 24 November 2026
+
+**Functional demonstration ready (public USBR manuals only).** The prototype was tested on a Windows PC and Lenovo Legion Pro 5i. It includes page-preserving preprocessing, BM25, MiniLM dense retrieval, RRF Hybrid, local Qwen3 Instruct answer generation, cited source passages, explicit refusal for unsupported TNB-specific questions, and offline navigation to locally stored public PDF pages.
+
+**Dataset:** 3 published USBR FIST manuals; 219 PDF pages; 511 text chunks; embedding array `(511, 384)`.
+
+**Experiment A:** A 12-question *document-level proxy* benchmark has been archived. At top-5, BM25, Dense and Hybrid each achieved document Hit@5 = 1.00; document MRR@5 was 0.9583, 0.8750 and 1.0000 respectively. This is **not** evidence of 100% passage relevance or answer accuracy. The archived latency values include possible model loading and are not controlled steady-state comparisons.
+
+**Important boundary:** No TNB REMACO internal data has been used. Industrial validation, formal passage-level labeling, answer-quality evaluation and final FYP research remain pending.
+
+### Start here: progress, code and results
+
+- [Full FYP1/FYP2 documentation hub](docs/INDEX.md)
+- [Development log — chronological milestones](docs/DEVELOPMENT_LOG.md)
+- [Experiment A — metrics, raw results and limitations](docs/EXPERIMENT_A_RESULTS.md)
+- [Supervisor demo walkthrough and setup](docs/DEMO_GUIDE.md)
+- [Actual Git commit history](https://github.com/AfiqRoslan/fist-rotating-machinery-rag-poc/commits/master/)
+- [Archived results and portable index](results/experiment_A_USBR/)
+- [RAG backend](rag_core.py) · [Streamlit app](app.py) · [Evaluator](evaluate.py) · [Core tests](tests/test_core.py)
+
+**Offline PDF setup:** The three public PDF files are intentionally Git-ignored. On each machine, run `python download_data.py`, copy `data/pdfs/*.pdf` to `static/`, and run Streamlit. The application code and static-serving configuration are in GitHub. Never use the public static directory for confidential industrial documents.
 
 ---
 
@@ -159,9 +179,9 @@ The project is being developed incrementally, beginning with document preprocess
 | Phase 4 | BM25 retrieval baseline | Completed |
 | Phase 5 | Preliminary BM25 evaluation | Completed |
 | Phase 6 — Step 1 | Dense embedding generation | Completed |
-| Phase 6 — Step 2 | Embedding verification | Not Started |
-| Phase 6 — Subsequent Work | Dense and hybrid retrieval evaluation | Pending |
-| Subsequent Development | End-to-end RAG evaluation | Pending |
+| Phase 6 — Step 2 | Embedding verification | Completed |
+| Phase 6 — Subsequent Work | Preliminary dense and hybrid retrieval evaluation | Completed |
+| Subsequent Development | End-to-end RAG functional testing | Completed; formal evaluation pending |
 
 ### 5.1 Document Preprocessing
 
@@ -267,7 +287,7 @@ python build_index.py --model sentence-transformers/all-MiniLM-L6-v2
 
 This confirms successful execution of the embedding-generation process.
 
-**Current boundary:** Numerical verification of the embedding matrix has not yet been performed. Dense and hybrid retrieval performance results are not available at this stage.
+**Verification update (24 November 2026):** The 511 x 384 embedding matrix was verified, and preliminary BM25, Dense, and Hybrid retrieval results are archived in `results/experiment_A_USBR/`. These are document-level proxy results, not validated passage-level accuracy measurements.
 
 ---
 
@@ -295,11 +315,11 @@ Dense embeddings were successfully generated locally for all 511 indexed text ch
 
 This provides the vector representations required for subsequent semantic retrieval experiments.
 
-Embedding verification and retrieval performance evaluation are still required.
+Embedding verification and preliminary retrieval evaluation have been completed. Formal passage-level relevance and answer-quality evaluation remain pending.
 
 ### 6.4 Current Evaluation Limitations
 
-The project has not yet established:
+The preliminary 12-question document-level experiment does not yet establish:
 
 - Whether dense retrieval outperforms BM25.
 - Whether hybrid retrieval improves retrieval effectiveness.
@@ -399,7 +419,7 @@ Open the local address displayed by Streamlit, normally:
 
 The interface provides retrieval configuration options, technical questions, retrieved passages, and optional locally generated answers.
 
-**Note:** The interface and generation integration are implemented in source code. Complete end-to-end answer-generation performance has not yet been evaluated.
+**Verification update (24 November 2026):** The Streamlit interface and local Qwen3 generation have been tested end to end, including cited answers and unsupported-question handling. Formal answer-quality and controlled performance evaluations remain pending.
 
 ---
 
@@ -412,8 +432,8 @@ The research aims to compare three retrieval approaches under a consistent exper
 | Method | Technique | Evaluation Status |
 |---|---|---|
 | BM25 | Lexical ranking | Preliminary evaluation completed |
-| Dense | Transformer embeddings and similarity ranking | Pending |
-| Hybrid | BM25 + Dense using RRF | Pending |
+| Dense | Transformer embeddings and similarity ranking | Preliminary evaluation completed |
+| Hybrid | BM25 + Dense using RRF | Preliminary evaluation completed |
 
 ### Preliminary Benchmark
 
@@ -472,14 +492,27 @@ A larger manually validated benchmark is required before drawing final research 
 - [x] Run preliminary BM25 evaluation.
 - [x] Generate transformer embeddings using MiniLM.
 
+### Completed Since Initial BM25 Baseline (24 November 2026)
+
+- [x] Verify embedding matrix and associated metadata.
+- [x] Validate 511 chunks against 511 embedding rows.
+- [x] Confirm finite numerical values and 384 embedding dimensions.
+- [x] Test dense semantic retrieval on maintenance questions.
+- [x] Execute preliminary Hybrid RRF retrieval evaluation.
+- [x] Compare BM25, Dense, and Hybrid using document-level proxy metrics.
+- [x] Test local Qwen3 answer generation with source citations.
+- [x] Test refusal handling for unsupported TNB-specific questions.
+- [x] Verify offline retrieval, generation, and local PDF navigation.
+- [x] Archive Experiment A results and portable retrieval index.
+- [x] Synchronize the working PoC to GitHub.
+
 ### In Progress / Next Development Stage
 
-- [ ] Phase 6 Step 2: Verify the embedding matrix and associated metadata.
-- [ ] Validate consistency between chunk count and embedding rows.
-- [ ] Confirm numerical validity and expected vector dimensions.
-- [ ] Test dense semantic retrieval on maintenance questions.
-- [ ] Evaluate hybrid retrieval using Reciprocal Rank Fusion.
-- [ ] Compare retrieval performance against the BM25 baseline.
+- [ ] Obtain supervisor feedback on research scope and objectives.
+- [ ] Confirm availability and permitted use of industrial datasets.
+- [ ] Expand and manually label a passage-level evaluation benchmark.
+- [ ] Evaluate answer correctness, groundedness, and citation accuracy.
+- [ ] Conduct controlled performance and reliability experiments.
 
 ### Future Planning
 
@@ -505,21 +538,49 @@ The main project components include:
 fist-rotating-machinery-rag-poc/
 |
 |-- README.md
-|-- requirements.txt
-|-- sources.json
-|-- download_data.py
-|-- build_index.py
-|-- rag_core.py
-|-- evaluate.py
-|-- benchmark_questions.csv
 |-- app.py
-|-- .gitignore
+|-- rag_core.py
+|-- build_index.py
+|-- download_data.py
+|-- evaluate.py
+|-- sources.json
+|-- benchmark_questions.csv
+|-- requirements.txt
+|-- requirements-dev.txt
 |
-|-- data/                  # Local generated data
-|   |-- pdfs/              # Downloaded USBR manuals
-|   |-- index/             # Text chunks and embeddings
+|-- .streamlit/
+|   `-- config.toml
 |
-|-- results/               # Local evaluation outputs
+|-- tests/
+|   `-- test_core.py
+|
+|-- docs/
+|   |-- INDEX.md
+|   |-- DEVELOPMENT_LOG.md
+|   |-- EXPERIMENT_A_RESULTS.md
+|   |-- EVIDENCE_REGISTER.md
+|   |-- DEMO_GUIDE.md
+|   |-- REPRODUCIBILITY.md
+|   |-- MEETING_LOG.md
+|   |-- DECISION_LOG.md
+|   |
+|   |-- fyp1/
+|   |   |-- RESEARCH_PLAN.md
+|   |   |-- LITERATURE_REVIEW_TRACKER.md
+|   |   `-- SUBMISSION_CHECKLIST.md
+|   |
+|   `-- fyp2/
+|       |-- IMPLEMENTATION_PLAN.md
+|       `-- EXPERIMENT_PLAN.md
+|
+|-- data/
+|   |-- pdfs/             # Downloaded PDFs, Git-ignored
+|   `-- index/            # Local generated retrieval index
+|
+|-- static/               # Local public PDFs, Git-ignored
+|
+`-- results/
+    `-- experiment_A_USBR/  # Archived baseline results
 ```
 
 The `data/` and `results/` entries describe local/generated locations. They are not necessarily populated in a fresh Git clone.
@@ -560,7 +621,7 @@ The initial benchmark contains only 12 questions and uses source-document labels
 
 **Model Verification**
 
-The embedding generation process has completed, but numerical verification and comprehensive dense retrieval evaluation remain pending.
+The 511 x 384 embedding matrix has been numerically verified, and preliminary Dense and Hybrid retrieval evaluations are archived in Experiment A. Comprehensive passage-level retrieval validation and formal answer-quality evaluation remain pending.
 
 **Operational Reliability**
 
@@ -623,4 +684,4 @@ Academic Session 2026/2027
 
 **Project Classification:** Academic Research Prototype
 
-**Current Research Stage:** Dense Embedding Generation Completed — Embedding Verification Pending
+**Current Research Stage:** Functional PoC Completed — Experiment A Archived — Formal Research Evaluation Ongoing
