@@ -24,6 +24,14 @@ The extracted chunks retain PDF physical page numbers. The local embedding array
 | Dense (MiniLM) | 1.0000 | 0.8750 | 1,280.63 ms |
 | Hybrid (RRF) | 1.0000 | 1.0000 | 453.11 ms |
 
+
+### Visual comparison ? Document-level MRR@5
+
+![Experiment A MRR@5 Comparison](figures/experiment_a_document_mrr_at5.png)
+
+*Figure 1: BM25, Dense, and Hybrid RRF retrieval comparison using 12 questions at Top-5. Document-level proxy results only.*
+
+
 **Interpretation:** Every strategy retrieved at least one passage from the expected document within five results for all 12 questions. Hybrid ranked the expected document highest more consistently than the other methods on this *specific small benchmark*. These numbers **do not prove** that Hybrid is more accurate at finding the correct passage or generating correct answers.
 
 **Latency caution:** Measurements can include one-time embedding model loading; they are not controlled steady-state comparisons. Do not claim that BM25 is definitively faster or Hybrid definitively best for real industrial use based on these alone.

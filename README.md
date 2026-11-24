@@ -16,6 +16,14 @@ The research compares **BM25, transformer-based dense retrieval, and hybrid retr
 
 **Experiment A:** A 12-question *document-level proxy* benchmark has been archived. At top-5, BM25, Dense and Hybrid each achieved document Hit@5 = 1.00; document MRR@5 was 0.9583, 0.8750 and 1.0000 respectively. This is **not** evidence of 100% passage relevance or answer accuracy. The archived latency values include possible model loading and are not controlled steady-state comparisons.
 
+
+### Experiment A - Retrieval Performance Visualization
+
+![Experiment A Document-level MRR@5](docs/figures/experiment_a_document_mrr_at5.png)
+
+*Figure 1: Document-level MRR@5 comparison of BM25, Dense, and Hybrid retrieval using 12 benchmark questions at Top-5. Preliminary results only; not passage-level or answer accuracy.*
+
+
 **Important boundary:** No TNB REMACO internal data has been used. Industrial validation, formal passage-level labeling, answer-quality evaluation and final FYP research remain pending.
 
 ### Start here: progress, code and results
